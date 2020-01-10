@@ -3,11 +3,22 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import typescript from 'rollup-plugin-typescript';
+
+const preprocessConfig = {
+
+}
+
+import sveltePreprocess from 'svelte-preprocess';
+
+const preprocess = sveltePreprocess({
+  typescript: true,
+});
 
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-	input: 'src/main.js',
+	input: 'src/main.ts',
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -19,7 +30,12 @@ export default {
 			// enable run-time checks when not in production
 			dev: !production,
 			// we'll extract any component CSS out into
-			// a separate file — better for performance
+            // a separate file — better for performance,
+            preprocess: sveltePreprocess({
+				typescript: {
+					allowSyntheticDefaultImports: true
+				},
+			  }),
 			css: css => {
 				css.write('public/build/bundle.css');
 			}
@@ -34,7 +50,8 @@ export default {
 			browser: true,
 			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
 			mainFields: ['main', 'module']
-		}),
+        }),
+        typescript(),
 		commonjs(),
 
 		// In dev mode, call `npm run start` once

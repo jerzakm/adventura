@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
   import { FirebaseApp, User, Doc, Collection } from "sveltefire";
 
   import firebase from "firebase/app";
@@ -7,17 +7,39 @@
   import "firebase/performance";
   import "firebase/analytics";
 
-  let firebaseConfig = {
-    apiKey: "AIzaSyDEjvvoQbZpiK7yUJZ6caRhg20B3FECApc",
-    authDomain: "marketflow-cbe21.firebaseapp.com",
-    databaseURL: "https://marketflow-cbe21.firebaseio.com",
-    projectId: "marketflow-cbe21",
-    storageBucket: "marketflow-cbe21.appspot.com",
-    messagingSenderId: "529420253182",
-    appId: "1:529420253182:web:fd47d2b9ad11f5cca932af"
-  };
+  import {firebaseConfig} from './firebase/firebase'
+
 
   firebase.initializeApp(firebaseConfig);
+
+  const auth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  let user: any;
+
+  const handleGoogleLogin = () => {
+      auth.signInWithPopup(provider).then(function(result) {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = result.credential.accessToken;
+        // The signed-in user info.
+        var firebaseuser = result.user;
+
+        if(firebaseuser) {
+            console.log(firebaseuser);
+        }
+        // ...
+        console.log(result)
+      }).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+    };
 </script>
 
 <main>
@@ -34,7 +56,7 @@
   <!-- 1. 🔥 Firebase App -->
   <FirebaseApp {firebase}>
 
-    <h1>💪🔥 Mode Activated</h1>
+    <h1>App</h1>
 
     <p>
       <strong>PRO Tip:</strong>
@@ -53,6 +75,9 @@
 
         <button on:click={() => auth.signInAnonymously()}>
           Sign In Anonymously
+        </button>
+        <button on:click={handleGoogleLogin}>
+          Google
         </button>
       </div>
 
