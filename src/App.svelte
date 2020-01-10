@@ -7,10 +7,10 @@
   import "firebase/performance";
   import "firebase/analytics";
 
-  import {firebaseConfig} from './firebase/firebase'
+  import {firebaseInit} from './firebase/core'
 
 
-  firebase.initializeApp(firebaseConfig);
+  firebaseInit()
 
   const auth = firebase.auth();
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -43,15 +43,6 @@
 </script>
 
 <main>
-
-  {#if !firebaseConfig.projectId}
-    <strong>Step 0</strong>
-    Create a
-    <a href="https://firebase.google.com/">Firebase Project</a>
-    and paste your web config into
-    <code>App.svelte</code>
-    .
-  {/if}
 
   <!-- 1. 🔥 Firebase App -->
   <FirebaseApp {firebase}>
