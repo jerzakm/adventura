@@ -1,5 +1,7 @@
-<script lang="typescript">
+<script>
   import { FirebaseApp, User, Doc, Collection } from "sveltefire";
+
+  import Navbar from './components/Navbar.svelte'
 
   import firebase from "firebase/app";
   import "firebase/firestore";
@@ -9,37 +11,12 @@
 
   import {firebaseInit} from './firebase/core'
 
-
   firebaseInit()
 
   const auth = firebase.auth();
-  const provider = new firebase.auth.GoogleAuthProvider();
 
-  let user: any;
+  let user;
 
-  const handleGoogleLogin = () => {
-      auth.signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var firebaseuser = result.user;
-
-        if(firebaseuser) {
-            console.log(firebaseuser);
-        }
-        // ...
-        console.log(result)
-      }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-    };
 </script>
 
 <main>
@@ -47,30 +24,11 @@
   <!-- 1. 🔥 Firebase App -->
   <FirebaseApp {firebase}>
 
-    <h1>App</h1>
-
-    <p>
-      <strong>PRO Tip:</strong>
-      Open the browser console for development logging.
-    </p>
-
-
     <!-- 2. 😀 Get the current user -->
+    <Navbar user/>
     <User let:user let:auth>
       Howdy 😀! User
       <em>{user.uid}</em>
-
-      <button on:click={() => auth.signOut()}>Sign Out</button>
-
-      <div slot="signed-out">
-
-        <button on:click={() => auth.signInAnonymously()}>
-          Sign In Anonymously
-        </button>
-        <button on:click={handleGoogleLogin}>
-          Google
-        </button>
-      </div>
 
       <hr />
 
@@ -139,7 +97,7 @@
 
 
 <!-- Styles -->
-<style>
+<style lang="scss">
   main {
     text-align: center;
     padding: 1em;
