@@ -27,8 +27,7 @@
     <!-- 2. 😀 Get the current user -->
     <Navbar user/>
     <User let:user let:auth>
-      Howdy 😀! User
-      <em>{user.uid}</em>
+      Hello <em>{user.uid}</em>
 
       <hr />
 

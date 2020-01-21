@@ -3,6 +3,7 @@
 
     <div>
         <User let:user let:auth>
+            {user.displayName? user.displayName : 'Anonymous'}
             <button on:click={() => auth.signOut()}>Sign Out</button>
 
             <div slot="signed-out">
