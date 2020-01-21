@@ -1,5 +1,5 @@
 <div class="navbar">
-    <span>Title</span>
+    <span class="logo">dFindr.app</span>
 
     <div>
         <User let:user let:auth>
@@ -22,8 +22,13 @@
     .navbar {
         display: flex;
         flex-direction: row;
-        align-content: space-around;
+        align-items: center;
+        justify-items: center;
         justify-content: space-between;
+    }
+
+    .logo {
+        font-size: 2em;
     }
 </style>
 

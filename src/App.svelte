@@ -17,6 +17,8 @@
 
   let user;
 
+  let location;
+
 </script>
 
 <main>
@@ -30,6 +32,18 @@
       Hello <em>{user.uid}</em>
 
       <hr />
+      <h2>Location</h2>
+      {#if location}
+        <span>{location.latitude} {location.longitude}</span>
+      {/if}
+      <button
+          on:click={() => {
+            navigator.geolocation.getCurrentPosition((loc)=> {
+              location = loc.coords
+            });
+          }}>
+          Current location
+      </button>
 
       <!-- 3. 📜 Get a Firestore document owned by a user -->
       <Doc path={`posts/${user.uid}`} let:data={post} let:ref={postRef} log>
