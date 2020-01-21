@@ -25,6 +25,7 @@
         align-items: center;
         justify-items: center;
         justify-content: space-between;
+        background-color: white;
     }
 
     .logo {

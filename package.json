@@ -9,6 +9,7 @@
     "start": "sirv public"
   },
   "devDependencies": {
+    "@types/mapbox-gl": "^1.6.3",
     "autoprefixer": "^9.7.4",
     "firebase": "^7.5.2",
     "node-sass": "^4.13.0",

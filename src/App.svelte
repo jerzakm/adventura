@@ -28,8 +28,8 @@
   <FirebaseApp {firebase}>
 
     <!-- 2. 😀 Get the current user -->
-    <Navbar user/>
     <Map/>
+    <Navbar user/>
     <User let:user let:auth>
       Hello <em>{user.uid}</em>
 
