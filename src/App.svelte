@@ -2,6 +2,7 @@
   import { FirebaseApp, User, Doc, Collection } from "sveltefire";
 
   import Navbar from './components/Navbar.svelte'
+  import Map from './components/Map.svelte'
 
   import firebase from "firebase/app";
   import "firebase/firestore";
@@ -28,6 +29,7 @@
 
     <!-- 2. 😀 Get the current user -->
     <Navbar user/>
+    <Map/>
     <User let:user let:auth>
       Hello <em>{user.uid}</em>
 

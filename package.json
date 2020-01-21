@@ -42,5 +42,8 @@
   "bugs": {
     "url": "https://github.com/jerzakm/adventura/issues"
   },
-  "homepage": "https://github.com/jerzakm/adventura#readme"
+  "homepage": "https://github.com/jerzakm/adventura#readme",
+  "dependencies": {
+    "mapbox-gl": "^1.6.1"
+  }
 }
