@@ -19,6 +19,7 @@
   let user;
 
   let location;
+  let center;
 
 </script>
 
@@ -28,12 +29,9 @@
   <FirebaseApp {firebase}>
 
     <!-- 2. 😀 Get the current user -->
-    <Map/>
     <Navbar user/>
+    <Map center={center}/>
     <User let:user let:auth>
-      Hello <em>{user.uid}</em>
-
-      <hr />
       <h2>Location</h2>
       {#if location}
         <span>{location.latitude} {location.longitude}</span>
@@ -42,6 +40,7 @@
           on:click={() => {
             navigator.geolocation.getCurrentPosition((loc)=> {
               location = loc.coords
+              center = location
             });
           }}>
           Current location

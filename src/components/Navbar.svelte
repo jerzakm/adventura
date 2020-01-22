@@ -25,7 +25,8 @@
         align-items: center;
         justify-items: center;
         justify-content: space-between;
-        background-color: white;
+        padding: 1em;
+        z-index: 1;
     }
 
     .logo {

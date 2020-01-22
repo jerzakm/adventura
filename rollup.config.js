@@ -40,16 +40,10 @@ export default {
 			// we'll extract any component CSS out into
             // a separate file — better for performance,
             preprocess: preprocess,
-			css: css => {
-				css.write('public/build/bundle.css');
-			}
+			// css: css => {
+			// 	css.write('public/build/bundle.css');
+			// }
 		}),
-
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration —
-		// consult the documentation for details:
-		// https://github.com/rollup/rollup-plugin-commonjs
 		resolve({
 			browser: true,
 			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),
