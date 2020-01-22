@@ -31,8 +31,7 @@
     <!-- 2. 😀 Get the current user -->
     <Navbar user/>
     <Map center={center}/>
-    <User let:user let:auth>
-      <h2>Location</h2>
+    <h2>Location</h2>
       {#if location}
         <span>{location.latitude} {location.longitude}</span>
       {/if}
@@ -40,14 +39,16 @@
           on:click={() => {
             navigator.geolocation.getCurrentPosition((loc)=> {
               location = loc.coords
-              center = location
+              center = [location.longitude, location.latitude]
             });
           }}>
           Current location
       </button>
+    <User let:user let:auth>
 
-      <!-- 3. 📜 Get a Firestore document owned by a user -->
-      <Doc path={`posts/${user.uid}`} let:data={post} let:ref={postRef} log>
+
+
+      <!-- <Doc path={`posts/${user.uid}`} let:data={post} let:ref={postRef} log>
 
         <h2>{post.title}</h2>
 
@@ -67,8 +68,6 @@
           </button>
         </span>
 
-        <!-- 4. 💬 Get all the comments in its subcollection -->
-
         <h3>Comments</h3>
         <Collection
           path={postRef.collection('comments')}
@@ -83,7 +82,6 @@
 
           {#each comments as comment}
             <p>
-              <!-- ID: <em>{comment.ref.id}</em> -->
             </p>
             <p>
               {comment.text}
@@ -103,7 +101,7 @@
           <span slot="loading">Loading comments...</span>
 
         </Collection>
-      </Doc>
+      </Doc> -->
     </User>
   </FirebaseApp>
 
