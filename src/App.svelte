@@ -21,6 +21,8 @@
   let location;
   let center;
 
+  let currentMarkerLoc;
+
 </script>
 
 <main>
@@ -30,7 +32,7 @@
 
     <!-- 2. 😀 Get the current user -->
     <Navbar user/>
-    <Map center={center}/>
+    <Map center={center} bind:markerLoc={currentMarkerLoc}/>
       {#if location}
         <span>{location.latitude} {location.longitude}</span>
       {/if}

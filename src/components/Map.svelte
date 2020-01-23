@@ -3,14 +3,14 @@
     import mapboxgl from 'mapbox-gl';
 
     let map;
-    let marker;
 
+    let marker;
+    export let markerLoc = [30,51]
     export let center
 
     $: setMapCenter(center)
 
     function setMapCenter(center){
-        console.log('map update')
         if(map&&center){
           map.flyTo({
             center: [
@@ -39,9 +39,16 @@
         marker = new mapboxgl.Marker({
             draggable: true
         })
-        .setLngLat([0, 0])
+        .setLngLat(markerLoc)
         .addTo(map);
 
+        function onDragEnd() {
+            const lngLat = marker.getLngLat();
+            markerLoc[0] = lngLat.lng
+            markerLoc[1] = lngLat.lat
+        }
+
+        marker.on('drag', onDragEnd);
     })
 </script>
 
