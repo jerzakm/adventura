@@ -31,7 +31,6 @@
     <!-- 2. 😀 Get the current user -->
     <Navbar user/>
     <Map center={center}/>
-    <h2>Location</h2>
       {#if location}
         <span>{location.latitude} {location.longitude}</span>
       {/if}

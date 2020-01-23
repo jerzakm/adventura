@@ -3,6 +3,7 @@
     import mapboxgl from 'mapbox-gl';
 
     let map;
+    let marker;
 
     export let center
 
@@ -11,22 +12,18 @@
     function setMapCenter(center){
         console.log('map update')
         if(map&&center){
-        //   const goal = center? center : [0,0]
-        //   const partial = [current[0]+(current[0]-goal[0])/100, goal[1]]
-        //   current = partial
-        //   console.log(`partial 0 ${partial}`)
-        //   map.setCenter(partial);
-
           map.flyTo({
             center: [
-                center[0] + (Math.random() - 0.5) * 4,
-                center[1] + (Math.random() - 0.5) * 4
+                center[0],
+                center[1]
             ],
             minZoom:7,
             zoom: 8,
             speed:0.39,
             essential: true // this animation is considered essential with respect to prefers-reduced-motion
           });
+
+          marker.setLngLat(center)
         }
     }
 
@@ -38,6 +35,12 @@
         })
         map.setZoom(4)
         map.setCenter([30,51])
+
+        marker = new mapboxgl.Marker({
+            draggable: true
+        })
+        .setLngLat([0, 0])
+        .addTo(map);
 
     })
 </script>
