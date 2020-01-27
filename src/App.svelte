@@ -33,77 +33,53 @@
     <!-- 2. 😀 Get the current user -->
     <Navbar user/>
     <Map center={center} bind:markerLoc={currentMarkerLoc}/>
-      {#if location}
-        <span>{location.latitude} {location.longitude}</span>
+      {#if currentMarkerLoc}
+        <h3>Marker location is {currentMarkerLoc[0].toFixed(4)} {currentMarkerLoc[1].toFixed(4)}</h3>
       {/if}
       <button
           on:click={() => {
             navigator.geolocation.getCurrentPosition((loc)=> {
               location = loc.coords
               center = [location.longitude, location.latitude]
+              currentMarkerLoc = center
             });
           }}>
-          Current location
+          Go to current location
       </button>
-    <User let:user let:auth>
 
-
-
-      <!-- <Doc path={`posts/${user.uid}`} let:data={post} let:ref={postRef} log>
-
-        <h2>{post.title}</h2>
-
-        <p>
-          Document
-          created at <em>{new Date(post.createdAt).toLocaleString()}</em>
-        </p>
-
-        <span slot="loading">Loading post...</span>
-        <span slot="fallback">
-          <button
-            on:click={() => postRef.set({
-                title: '📜 I like Svelte',
-                createdAt: Date.now()
-              })}>
-            Create Document
-          </button>
-        </span>
-
-        <h3>Comments</h3>
-        <Collection
-          path={postRef.collection('comments')}
+      <Collection
+          path={`listings`}
           query={ref => ref.orderBy('createdAt')}
-          let:data={comments}
-          let:ref={commentsRef}
+          let:data={listings}
+          let:ref={listingsRef}
           log>
 
-          {#if !comments.length}
-              No comments yet...
+          {#if !listings.length}
+              No listings yet..
           {/if}
 
-          {#each comments as comment}
+          {#each listings as listing}
             <p>
             </p>
             <p>
-              {comment.text}
-              <button on:click={() => comment.ref.delete()}>Delete</button>
+              {listing.location}
+              <button on:click={() => listing.ref.delete()}>Delete</button>
             </p>
           {/each}
 
 
-          <button
-            on:click={() => commentsRef.add({
-                text: '💬 Me too!',
-                createdAt: Date.now()
-              })}>
-            Add Comment
-          </button>
-
-          <span slot="loading">Loading comments...</span>
-
+          <User let:user let:auth>
+            <button
+              on:click={() => listingsRef.add({
+                  location: currentMarkerLoc,
+                  createdAt: Date.now(),
+                  owner: user.uid
+                })}>
+              Add Marker
+            </button>
+          </User>
         </Collection>
-      </Doc> -->
-    </User>
+
   </FirebaseApp>
 
 </main>

@@ -5,7 +5,7 @@
     let map;
 
     let marker;
-    export let markerLoc = [30,51]
+    export let markerLoc = [15,49]
     export let center
 
     $: setMapCenter(center)
