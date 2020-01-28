@@ -1,37 +1,40 @@
-<div class="navbar">
-    <span class="logo">dFindr.app</span>
+<div class="navbar-container">
+    <div class="navbar">
+        <span class="logo">S</span>
+        <div>
+            <User let:user let:auth>
+                {user.displayName? user.displayName : 'Anonymous'}
+                <button on:click={() => auth.signOut()}>Sign Out</button>
 
-    <div>
-        <User let:user let:auth>
-            {user.displayName? user.displayName : 'Anonymous'}
-            <button on:click={() => auth.signOut()}>Sign Out</button>
-
-            <div slot="signed-out">
-                <button on:click={() => auth.signInAnonymously()} class="button">
-                    Sign In Anonymously
-                </button>
-                <button on:click={handleGoogleLogin} class="button">
-                    Google
-                </button>
-            </div>
-        </User>
+                <div slot="signed-out">
+                    <button on:click={() => auth.signInAnonymously()} class="button">
+                        A
+                    </button>
+                    <button on:click={handleGoogleLogin} class="button">
+                        G
+                    </button>
+                </div>
+            </User>
+        </div>
+    </div>
+    <div class="subbar">
+        <h3>test</h3>
     </div>
 </div>
-
-<style>
+<style lang="scss">
+    .navbar-container {
+        width:100%;
+        display:flex;
+        flex-direction: column;
+    }
     .button {
         border: 0;
         border-radius: 0.25rem;
-        /* background: #1E88E5; */
         font-size: 1.2rem;
         text-decoration: none;
-        padding: 0.5rem 0.5rem;
         margin: 0.25rem;
         cursor: pointer;
-        border-radius: 10px;
         background: white;
-        box-shadow: 4px 4px 9px #b9b9b9,
-            -4px -4px 9px #fbfbfb;
     }
     .navbar {
         display: flex;
@@ -39,8 +42,14 @@
         align-items: center;
         justify-items: center;
         justify-content: space-between;
-        padding: 1em;
+        /* padding: 1em; */
         z-index: 1;
+        flex-basis: 1;
+        width:100%;
+        background-color: #1f1f1ffa;
+    }
+    .subbar{
+        background-color: #1f1f1fe1;
     }
 
     .logo {

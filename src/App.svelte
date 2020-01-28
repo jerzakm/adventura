@@ -96,35 +96,19 @@
   }
 
   .container{
-    display: grid;
-    grid-template-rows: 1fr 5fr;
-    grid-template-columns: 2fr 5fr;
-    grid-template-areas:
-      "header header header"
-      "sidebar main main";
-    grid-gap: 0;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
-    @media(max-width: 768px){
-      grid-template-rows: 1fr 1fr 5fr;
-      grid-template-columns: 2fr 5fr;
-      grid-template-areas:
-      "header header header"
-      "sidebar sidebar sidebar"
-      "main main main";
-    }
-    @media(max-width: 480px){
-      display: block;
-    }
+
     header{
-      grid-area: header;
       z-index: 5;
+      display:flex;
     }
     sidebar{
-      grid-area: sidebar;
       z-index: 5;
     }
     main{
-      grid-area: main;
+
     }
   }
 </style>
