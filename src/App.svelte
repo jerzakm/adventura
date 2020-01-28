@@ -26,14 +26,17 @@
 </script>
 
 <main>
-
   <!-- 1. 🔥 Firebase App -->
   <FirebaseApp {firebase}>
 
     <!-- 2. 😀 Get the current user -->
-    <Navbar user/>
-    <Map center={center} bind:markerLoc={currentMarkerLoc}/>
-      {#if currentMarkerLoc}
+  <div class="container">
+    <header><Navbar user/></header>
+    <sidebar>NAV</sidebar>
+    <main><Map center={center} bind:markerLoc={currentMarkerLoc}/></main>
+  </div>
+      <div class="side-bar">
+        {#if currentMarkerLoc}
         <h3>Marker location is {currentMarkerLoc[0].toFixed(4)} {currentMarkerLoc[1].toFixed(4)}</h3>
       {/if}
       <button
@@ -59,12 +62,12 @@
           {/if}
 
           {#each listings as listing}
-            <p>
+            <!-- <p>
             </p>
             <p>
               {listing.location}
               <button on:click={() => listing.ref.delete()}>Delete</button>
-            </p>
+            </p> -->
           {/each}
 
 
@@ -79,6 +82,7 @@
             </button>
           </User>
         </Collection>
+      </div>
 
   </FirebaseApp>
 
@@ -88,26 +92,39 @@
 <!-- Styles -->
 <style lang="scss">
   main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
+
   }
 
-  h1,
-  em {
-    color: #ff3e00;
-  }
-
-  hr {
-    height: 1px;
-    border: none;
-    background: rgb(195, 195, 195);
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
+  .container{
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    grid-template-columns: 2fr 5fr;
+    grid-template-areas:
+      "header header header"
+      "sidebar main main";
+    grid-gap: 0;
+    height: 100vh;
+    @media(max-width: 768px){
+      grid-template-rows: 1fr 1fr 5fr;
+      grid-template-columns: 2fr 5fr;
+      grid-template-areas:
+      "header header header"
+      "sidebar sidebar sidebar"
+      "main main main";
+    }
+    @media(max-width: 480px){
+      display: block;
+    }
+    header{
+      grid-area: header;
+      z-index: 5;
+    }
+    sidebar{
+      grid-area: sidebar;
+      z-index: 5;
+    }
+    main{
+      grid-area: main;
     }
   }
 </style>
