@@ -31,15 +31,13 @@
 
     <!-- 2. 😀 Get the current user -->
   <div class="container">
-    <header><Navbar user/></header>
-    <sidebar>NAV</sidebar>
-    <main><Map center={center} bind:markerLoc={currentMarkerLoc}/></main>
-  </div>
-      <div class="side-bar">
+    <div class="header"><Navbar user/></div>
+    <div class="main">
+      <div class="sidebar">
         {#if currentMarkerLoc}
-        <h3>Marker location is {currentMarkerLoc[0].toFixed(4)} {currentMarkerLoc[1].toFixed(4)}</h3>
-      {/if}
-      <button
+          <h3>Marker location is {currentMarkerLoc[0].toFixed(4)} {currentMarkerLoc[1].toFixed(4)}</h3>
+        {/if}
+        <button
           on:click={() => {
             navigator.geolocation.getCurrentPosition((loc)=> {
               location = loc.coords
@@ -48,9 +46,8 @@
             });
           }}>
           Go to current location
-      </button>
-
-      <Collection
+        </button>
+        <Collection
           path={`listings`}
           query={ref => ref.orderBy('createdAt')}
           let:data={listings}
@@ -62,12 +59,12 @@
           {/if}
 
           {#each listings as listing}
-            <!-- <p>
+            <p>
             </p>
             <p>
               {listing.location}
               <button on:click={() => listing.ref.delete()}>Delete</button>
-            </p> -->
+            </p>
           {/each}
 
 
@@ -83,6 +80,11 @@
           </User>
         </Collection>
       </div>
+      <div class="map">
+        <Map center={center} bind:markerLoc={currentMarkerLoc}/>
+      </div>
+    </div>
+  </div>
 
   </FirebaseApp>
 
@@ -100,15 +102,26 @@
     flex-direction: column;
     height: 100vh;
 
-    header{
+    .header{
       z-index: 5;
       display:flex;
     }
-    sidebar{
-      z-index: 5;
-    }
-    main{
+    .main {
+      display:flex;
+      flex-direction: row;
 
+      .sidebar {
+        z-index:10;
+        // flex-grow: 1;
+        flex-basis: 400px;
+        margin: 1em;
+        padding: 1em;
+        background-color: #1f1f1fe1;
+      }
+
+      .map {
+        flex-grow: 3;
+      }
     }
   }
 </style>
