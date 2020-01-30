@@ -3,6 +3,7 @@
 
   import Navbar from './components/Navbar.svelte'
   import Map from './components/Map.svelte'
+  import Listings from './components/Listings.svelte'
 
   import firebase from "firebase/app";
   import "firebase/firestore";
@@ -34,7 +35,7 @@
     <div class="header"><Navbar user/></div>
     <div class="main">
       <div class="sidebar">
-        {#if currentMarkerLoc}
+        <!-- {#if currentMarkerLoc}
           <h3>Marker location is {currentMarkerLoc[0].toFixed(4)} {currentMarkerLoc[1].toFixed(4)}</h3>
         {/if}
         <button
@@ -46,14 +47,14 @@
             });
           }}>
           Go to current location
-        </button>
+        </button> -->
         <Collection
           path={`listings`}
           query={ref => ref.orderBy('createdAt')}
           let:data={listings}
           let:ref={listingsRef}
           log>
-
+          <Listings listings={listings}/>
           {#if !listings.length}
               No listings yet..
           {/if}

@@ -1,10 +1,12 @@
 <script>
     import {onMount} from 'svelte'
-    import mapboxgl from 'mapbox-gl';
+    import mapboxgl from 'mapbox-gl'
+    import Markers from './Markers.svelte'
 
     let map;
 
     let marker;
+
     export let markerLoc = [15,49]
     export let center
 
@@ -20,7 +22,7 @@
             minZoom:7,
             zoom: 8,
             speed:0.39,
-            essential: true // this animation is considered essential with respect to prefers-reduced-motion
+            essential: true //this animation is considered essential with respect to prefers-reduced-motion
           });
 
           marker.setLngLat(center)
@@ -63,3 +65,4 @@
 </style>
 
 <div id="mapbox"></div>
+<Markers map={map}/>
