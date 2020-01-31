@@ -9,25 +9,26 @@
         visibleMarkers_value = value;
     });
 
-    $: updateMarkers(map, visibleMarkers_value)
+    $: updateMarkers(visibleMarkers_value)
 
-    const currentMarkers = []
+    let currentMarkers = []
 
-    function updateMarkers() {
+    function updateMarkers(visibleMarkers_value) {
         if(map&&visibleMarkers_value){
             console.log(map)
             for(let i = 0; i< currentMarkers.length; i++) {
                 currentMarkers[i].remove()
-                currentMarkers.shift()
             }
 
+            currentMarkers = []
+
             for(let i =0; i<visibleMarkers_value.length;i++){
-                let popup = new mapboxgl.Popup({ offset: 25 }).setText(
-                    'Test12313123123123123'
-                );
                 if(visibleMarkers_value.length>0){
+                    let popup = new mapboxgl.Popup().setText(
+                        'Test12313123123123123'
+                    );
                     // create DOM element for the marker
-                    var el = document.createElement('div');
+                    const el = document.createElement('div');
                     el.className = 'marker';
 
                     // create the marker
@@ -41,7 +42,3 @@
         }
     }
 </script>
-
-<style>
-
-</style>

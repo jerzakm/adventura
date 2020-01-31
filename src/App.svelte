@@ -55,19 +55,6 @@
           let:ref={listingsRef}
           log>
           <Listings listings={listings}/>
-          {#if !listings.length}
-              No listings yet..
-          {/if}
-
-          {#each listings as listing}
-            <p>
-            </p>
-            <p>
-              {listing.location}
-              <button on:click={() => listing.ref.delete()}>Delete</button>
-            </p>
-          {/each}
-
 
           <User let:user let:auth>
             <button
