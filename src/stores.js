@@ -3,4 +3,6 @@ import {
 } from 'svelte/store';
 
 export const visibleMarkers = writable([]);
+
+
 export const currentMarkerLocation = writable([])

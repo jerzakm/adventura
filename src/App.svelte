@@ -38,15 +38,6 @@
       display: flex;
       flex-direction: row;
 
-      .sidebar {
-        z-index: 10;
-        // flex-grow: 1;
-        flex-basis: 400px;
-        margin: 1em;
-        padding: 1em;
-        background-color: #1f1f1fe1;
-      }
-
       .map {
         flex-grow: 3;
       }
@@ -64,9 +55,7 @@
         <Navbar user />
       </div>
       <div class="main">
-        <div class="sidebar">
-          <Mainbar />
-        </div>
+        <Mainbar />
         <div class="map">
           <Map {center} />
         </div>

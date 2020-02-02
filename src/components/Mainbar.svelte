@@ -16,22 +16,35 @@
   }
 </script>
 
-<Collection
-  path={`listings`}
-  query={ref => ref.orderBy('createdAt')}
-  let:data={listings}
-  let:ref={listingsRef}
-  log>
-  <Listings {listings} />
+<style>
+  .sidebar {
+    z-index: 10;
+    flex-grow: 1;
+    flex-basis: 400px;
+    height: 100%;
+    padding: 1em;
+    background-color: #1f1f1fe1;
+  }
+</style>
 
-  <User let:user let:auth>
-    <!-- <button
-      on:click={() => listingsRef.add({
-          location: currentMarkerLoc,
-          createdAt: Date.now(),
-          owner: user.uid
-        })}>
-      Add Marker
-    </button> -->
-  </User>
-</Collection>
+<div class="sidebar">
+  <Collection
+    path={`listings`}
+    query={ref => ref.orderBy('createdAt')}
+    let:data={listings}
+    let:ref={listingsRef}
+    log>
+    <Listings {listings} />
+
+    <User let:user let:auth>
+      <button
+        on:click={() => listingsRef.add({
+            location: currentMarkerLocation_value,
+            createdAt: Date.now(),
+            owner: user.uid
+          })}>
+        Add Marker
+      </button>
+    </User>
+  </Collection>
+</div>
