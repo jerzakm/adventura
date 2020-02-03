@@ -43,7 +43,7 @@
       "pk.eyJ1IjoiamVyemFrbSIsImEiOiJjangxaHF4MGcwN3ZqNGJubzl2Zzdva3N5In0.DRchXs3ESLUuoH9Kh_N-ow";
     map = new mapboxgl.Map({
       container: "mapbox",
-      style: "mapbox://styles/mapbox/light-v10"
+      style: "mapbox://styles/jerzakm/ck65mpipg0v0h1inp3in1rmn9"
     });
     map.setZoom(4);
     map.setCenter([30, 51]);
@@ -61,6 +61,11 @@
     }
 
     marker.on("drag", onDragEnd);
+
+    map.on("styleimagemissing", e => {
+      console.log(e);
+      map.addImage("", e.style.imageManager.images.ship128.data);
+    });
   });
 </script>
 
